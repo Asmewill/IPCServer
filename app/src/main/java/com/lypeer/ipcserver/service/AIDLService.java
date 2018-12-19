@@ -30,7 +30,7 @@ public class AIDLService extends Service {
         @Override
         public List<Book> getBooks() throws RemoteException {
             synchronized (this) {
-                Log.e(TAG, "invoking getBooks() method , now the list is : " + mBooks.toString());
+                Log.i(TAG, "invoking getBooks() method , now the list is : " + mBooks.toString());
                 if (mBooks != null) {
                     return mBooks;
                 }
@@ -55,7 +55,7 @@ public class AIDLService extends Service {
                     mBooks.add(book);
                 }
                 //打印mBooks列表，观察客户端传过来的值
-                Log.e(TAG, "invoking addBooks() method , now the list is : " + mBooks.toString());
+                Log.i(TAG, "invoking addBookIn() method , now the list is : " + mBooks.toString());
                 return book;
             }
         }
@@ -74,7 +74,7 @@ public class AIDLService extends Service {
                 if (!mBooks.contains(book)) {
                     mBooks.add(book);
                 }
-                Log.e(TAG, "invoking addBooks() method , now the list is : " + mBooks.toString());
+                Log.e(TAG, "invoking addBookOut() method , now the list is : " + mBooks.toString());
                 return book;
             }
         }
@@ -93,9 +93,14 @@ public class AIDLService extends Service {
                 if (!mBooks.contains(book)) {
                     mBooks.add(book);
                 }
-                Log.e(TAG, "invoking addBooks() method , now the list is : " + mBooks.toString());
+                Log.i(TAG, "invoking addBookInout() method , now the list is : " + mBooks.toString());
                 return book;
             }
+        }
+
+        @Override
+        public String getString() throws RemoteException {
+            return "aaaa";
         }
     };
 
@@ -111,7 +116,7 @@ public class AIDLService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        Log.e(getClass().getSimpleName(), String.format("on bind,intent = %s", intent.toString()));
+        Log.i(getClass().getSimpleName(), String.format("on bind,intent = %s", intent.toString()));
         return mBookManager;
     }
 }
